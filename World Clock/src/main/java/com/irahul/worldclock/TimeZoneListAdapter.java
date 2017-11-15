@@ -17,7 +17,7 @@
  */
 package com.irahul.worldclock;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Date;
 
 import android.content.Context;
@@ -37,7 +37,7 @@ import android.widget.TextView;
  */
 public class TimeZoneListAdapter extends ArrayAdapter<WorldClockTimeZone> {	
 	//TODO - externalize into preferences in the future
-	private SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEEE hh:mm a");
+	private DateFormat DATE_FORMAT = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT);
 	private WorldClockTimeZone[] displayTimeZones;
 	
 	public TimeZoneListAdapter(Context context, WorldClockTimeZone[] tzValues) {
