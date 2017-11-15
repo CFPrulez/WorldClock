@@ -17,10 +17,13 @@
  */
 package com.irahul.worldclock;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,6 +50,21 @@ public class WorldClockData {
 	private Set<WorldClockTimeZone> selectedTimeZones = null;
 	private Context context;
 
+	/*
+	Source: http://www.java2s.com/Code/Java/File-Input-Output/ConvertInputStreamtoString.htm
+	 */
+	public String convertStreamToString(InputStream is) throws Exception {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuilder sb = new StringBuilder();
+		String line;
+		while ((line = reader.readLine()) != null) {
+			sb.append(line + "\n");
+		}
+		is.close();
+		return sb.toString();
+	}
+
+
 	public WorldClockData(Context context) {
 		this.context = context;
 
@@ -54,15 +72,10 @@ public class WorldClockData {
 		if (this.selectedTimeZones == null) {
 			try {
 				FileInputStream fis = context.openFileInput(FILENAME);
-				StringBuilder fileData = new StringBuilder();
+				String fileDataString = convertStreamToString(fis);
 
-				byte[] buffer = new byte[1];
-				while (fis.read(buffer) != -1) {
-					fileData.append(new String(buffer));
-				}
-
-				Log.d(TAG, "RAW - Loaded from file:" + fileData.toString());
-				selectedTimeZones = deserialize(fileData.toString());
+				Log.d(TAG, "RAW - Loaded from file:" + fileDataString);
+				selectedTimeZones = deserialize(fileDataString);
 
 			} catch (FileNotFoundException e) {
 				// no file exists - treat as empty list and create file
@@ -73,8 +86,10 @@ public class WorldClockData {
 				throw new WorldClockException(e);
 			} catch (JSONException e) {
 				throw new WorldClockException(e);
-			}
-		}
+			} catch (Exception e) {
+				throw new WorldClockException(e);
+            }
+        }
 	}
 
 	public Set<WorldClockTimeZone> getSavedTimeZones() {
