@@ -6,6 +6,18 @@ Great app from Rahul Agarwal but unfortunately no updated since 2012. I'll imple
 * Enhancement: 12/24 hours formatting is now done using the system settings 
 * Improvement: Build with new SDK -- same code, new design
 
+## Roadmap
+TODOs (some may be implemented in the future):
+
+- [x] ~~New SDK for new UI~~
+- [x] ~~Support for non-ASCII characters~~
+- [x] ~~12/24 hour format depending on system settings~~
+- [ ] Update About section
+- [ ] More material design elements (FAB)
+- [ ] Sort by datetime not "random"
+- [ ] Custom sorting
+- [ ] Provide apk/Merge into upstream
+
 ## Original app
 
   Copyright (C) 2012 Rahul Agarwal
