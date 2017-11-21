@@ -25,12 +25,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -186,20 +185,20 @@ public class WorldClockActivity extends AppCompatActivity {
 	}
 	
 	private void showAboutDialog() {
-		SpannableString aboutMessage = new SpannableString(getText(R.string.about_message));
-	    Linkify.addLinks(aboutMessage, Linkify.WEB_URLS);
-		
+		LayoutInflater inflater = LayoutInflater.from(WorldClockActivity.this);
+		View v = inflater.inflate(R.layout.scrollable_textview, null);
+		TextView aboutText = v.findViewById(R.id.textview_scrollable);
+		aboutText.setText(R.string.about_message);
+		aboutText.setMovementMethod(LinkMovementMethod.getInstance());
+
 	    AlertDialog dialog = new AlertDialog.Builder(this)
 			.setPositiveButton(android.R.string.ok, null)
 			.setTitle(R.string.about_title)
 			.setCancelable(true)
-			.setMessage(aboutMessage)
+			.setView(v)
 			.create();
 		
 		dialog.show();
-	
-		// Make the textview clickable. Must be called after show()
-		((TextView)dialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	private void invokeAddZoneActivity() {

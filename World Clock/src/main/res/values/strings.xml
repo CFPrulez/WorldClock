@@ -35,6 +35,17 @@
     <string name="error_must_pick_zone_name">Please select a timezone and custom name</string>
     
     <!-- About dialog -->	
-    <string name="about_title">AndroidOpenSourceApps.org</string>
-	<string name="about_message">This app is free software. Please consider a donation, visit <a href="http://www.androidopensourceapps.org">AndroidOpenSourceApps.org</a> to find more details.</string>
+    <string name="about_title">About World Clock</string>
+    <string name="about_message">This app is free software. It was initially created by
+        <a href="https://github.com/rahulaga/WorldClock">Rahul Agarwal</a> in 2012 and enhanced by
+        <a href="https://github.com/CFPrulez/WorldClock">CFPrulez</a> five years later.\n\n
+
+        License: World Clock is licensed under
+        <a href="https://raw.githubusercontent.com/rahulaga/WorldClock/master/gpl.txt">GNU GPL v3</a>.\n\n
+
+        The following project(s) are used in this application:\n\n
+        · Material Design Icons:\n
+        \t License: CC BY 4.0 \n
+        \t Link: <a href="https://www.google.com/design/icons/">https://www.google.com/design/icons/</a>\n
+    </string>
 </resources>
