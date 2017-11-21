@@ -19,11 +19,12 @@ package com.irahul.worldclock;
 
 import java.util.TimeZone;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -36,7 +37,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -46,7 +46,7 @@ import android.widget.TextView;
  * @author rahul
  * 
  */
-public class WorldClockActivity extends Activity {	
+public class WorldClockActivity extends AppCompatActivity {
 	private static final String TAG = WorldClockActivity.class.getName();	
 	//
 	//Intent extras map keys
@@ -77,9 +77,9 @@ public class WorldClockActivity extends Activity {
 		
 		// register to get context event to edit/delete
 		ListView mainListView = (ListView)findViewById(R.id.main_list_view);
-		registerForContextMenu(mainListView);	
+		registerForContextMenu(mainListView);
 		
-		Button mainAddButton = (Button)findViewById(R.id.main_button_add);
+		FloatingActionButton mainAddButton = findViewById(R.id.main_button_add);
 		mainAddButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View v) {

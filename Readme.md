@@ -18,6 +18,11 @@ TODOs (some may be implemented in the future):
 - [ ] Custom sorting
 - [ ] Provide apk/Merge into upstream
 
+## Included projects
+Tools and Libraries that are used:
+
+- [Material Design Icons](https://www.google.com/design/icons/), License: CC BY 4.0
+
 ## Original app
 
   Copyright (C) 2012 Rahul Agarwal
