@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.irahul.worldclock"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 27
     }
 
@@ -16,4 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:27.0.1'
+    compile 'com.android.support:support-compat:27.0.1'
+    compile 'com.android.support:design:27.0.1'
 }

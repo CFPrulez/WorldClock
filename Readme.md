@@ -1,10 +1,10 @@
 # World Clock (Android App)
-Great app from Rahul Agarwal but unfortunately no updated since 2012. I'll implement some bug fixes and features that I'd like to have in this app -- I share the changes with you. Maybe some of these will be merged to the original project as well…
+Great app from Rahul Agarwal but unfortunately no updated since 2012. I’ll implement some bug fixes and features that I’d like to have in this app — I share the changes with you. Maybe some of these will be merged to the original project as well…
 
 ## New in version 0.7
 * Bugfix: UTF-8 characters are displayed correctly
 * Enhancement: 12/24 hours formatting is now done using the system settings 
-* Improvement: Build with new SDK -- same code, new design
+* Improvement: Build with new SDK — same code, new design
 
 ## Roadmap
 TODOs (some may be implemented in the future):
