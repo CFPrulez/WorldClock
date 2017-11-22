@@ -19,6 +19,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/menu_up"
+        android:title="@string/menu_up"/>
+    <item
+        android:id="@+id/menu_down"
+        android:title="@string/menu_down"/>
+    <item
         android:id="@+id/menu_edit"
         android:title="@string/menu_edit"/>
     <item

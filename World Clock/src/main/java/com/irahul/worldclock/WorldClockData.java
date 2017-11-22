@@ -46,6 +46,7 @@ public class WorldClockData {
 	private static final String TAG = WorldClockData.class.getName();
 	private static final String DISPLAY_NAME = "displayName";
 	private static final String TIMEZONE_ID = "timezoneId";
+	private static final String POSITION = "position";
 	private static final String FILENAME = "WorldClockData";	
 	private Set<WorldClockTimeZone> selectedTimeZones = null;
 	private Context context;
@@ -127,7 +128,7 @@ public class WorldClockData {
 	/**
 	 * Writes set to file (assume not null)
 	 */
-	private void updateFile() {		
+	protected void updateFile() {
 		try {
 			JSONArray arr = serialize();
 			writeToFile(arr.toString());
@@ -162,6 +163,7 @@ public class WorldClockData {
 			JSONObject jsonTz = new JSONObject();
 			jsonTz.put(TIMEZONE_ID, tz.getId());
 			jsonTz.put(DISPLAY_NAME, tz.getDisplayName());
+			jsonTz.put(POSITION, tz.getPosition());
 			jsonArr.put(jsonTz);
 		}
 		return jsonArr;
@@ -178,6 +180,11 @@ public class WorldClockData {
 			WorldClockTimeZone tz = new WorldClockTimeZone(
 					TimeZone.getTimeZone(jsonObj.getString(TIMEZONE_ID)));			
 			tz.setDisplayName(jsonObj.getString(DISPLAY_NAME));
+			try {
+				tz.setPosition(jsonObj.getInt(POSITION));
+			} catch (JSONException e) {
+				tz.setPosition(-1);
+			}
 
 			arr.add(tz);
 		}

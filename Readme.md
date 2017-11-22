@@ -1,6 +1,12 @@
 # World Clock (Android App)
 Great app from Rahul Agarwal but unfortunately no updated since 2012. I’ll implement some bug fixes and features that I’d like to have in this app — I share the changes with you. Maybe some of these will be merged to the original project as well…
 
+## New in version 0.8
+* Enhancement: Custom sorting 
+* Design: Introduce FloatingActionButton
+
+The FAB requires minSdk 21 (Android Lollipop, 5.0). If you use a phone with an older Android version you have to build the app without commit [132e696](https://github.com/CFPrulez/WorldClock/commit/132e696e38e96f64d5d726b123c34ef5237e32bf).
+
 ## New in version 0.7
 * Bugfix: UTF-8 characters are displayed correctly
 * Enhancement: 12/24 hours formatting is now done using the system settings 
@@ -13,9 +19,9 @@ TODOs (some may be implemented in the future):
 - [x] ~~Support for non-ASCII characters~~
 - [x] ~~12/24 hour format depending on system settings~~
 - [ ] Update About section
-- [ ] More material design elements (FAB)
-- [ ] Sort by datetime not "random"
-- [ ] Custom sorting
+- [x] ~~Material design elements (FAB)~~
+- [x] ~~Custom sorting~~
+- [ ] More material design elements (ActionBar)
 - [ ] Provide apk/Merge into upstream
 
 ## Included projects

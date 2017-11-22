@@ -22,6 +22,8 @@
     <string name="menu_add">Add Zone</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Remove</string>
+    <string name="menu_up">Up</string>
+    <string name="menu_down">Down</string>
     <string name="menu_about">About</string>
     
     <!-- Timezone Edit Activity -->

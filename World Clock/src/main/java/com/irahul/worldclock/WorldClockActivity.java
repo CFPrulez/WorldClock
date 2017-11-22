@@ -17,6 +17,8 @@
  */
 package com.irahul.worldclock;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TimeZone;
 
 import android.app.AlertDialog;
@@ -112,22 +114,34 @@ public class WorldClockActivity extends AppCompatActivity {
 		WorldClockTimeZone selectedTimeZone = (WorldClockTimeZone) mainListView.getAdapter().getItem(info.position);
 
 		switch (item.getItemId()) {
-		case R.id.menu_edit:
-			// edit
-			Intent editIntent = new Intent(Intent.ACTION_EDIT);
-			editIntent.putExtra(INTENT_TZ_ID_IN, selectedTimeZone.getId());
-			editIntent.putExtra(INTENT_TZ_DISPLAYNAME_IN, selectedTimeZone.getDisplayName());
-			editIntent.setComponent(new ComponentName(this, TimeZoneEdit.class));
-			startActivityForResult(editIntent, REQ_CODE_EDIT_ZONE);
-			return true;
-		case R.id.menu_delete:
-			// delete
-			data.deleteZone(selectedTimeZone);
-			refreshListView();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+			case R.id.menu_up:
+				changePositionUp(selectedTimeZone);
+				refreshListView();
+				data.updateFile();
+				return true;
+			case R.id.menu_down:
+				changePositionDown(selectedTimeZone);
+				refreshListView();
+				data.updateFile();
+				return true;
+			case R.id.menu_edit:
+				// edit
+				Intent editIntent = new Intent(Intent.ACTION_EDIT);
+				editIntent.putExtra(INTENT_TZ_ID_IN, selectedTimeZone.getId());
+				editIntent.putExtra(INTENT_TZ_DISPLAYNAME_IN, selectedTimeZone.getDisplayName());
+				editIntent.setComponent(new ComponentName(this, TimeZoneEdit.class));
+				startActivityForResult(editIntent, REQ_CODE_EDIT_ZONE);
+				return true;
+			case R.id.menu_delete:
+				// delete
+				int position = selectedTimeZone.getPosition();
+				data.deleteZone(selectedTimeZone);
+				changePositionsAfterWorldClockTimeZoneRemoval(position);
+				refreshListView();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+			}
 	}
 	
 	@Override
@@ -206,7 +220,77 @@ public class WorldClockActivity extends AppCompatActivity {
 		intent.setComponent(new ComponentName(this, TimeZoneEdit.class));
 		startActivityForResult(intent, REQ_CODE_ADD_ZONE);
 	}
-	
+
+	private void changePositionUp(WorldClockTimeZone selectedTimeZone) {
+		int position = selectedTimeZone.getPosition();
+		if(position == 0)
+			return;
+
+		for(WorldClockTimeZone w : data.getSavedTimeZones()) {
+			if(w.getPosition() == position - 1) {
+				w.setPosition(position);
+				break;
+			}
+		}
+
+		selectedTimeZone.setPosition(position - 1);
+	}
+
+	private void changePositionDown(WorldClockTimeZone selectedTimeZone) {
+		int position = selectedTimeZone.getPosition();
+
+		Set<WorldClockTimeZone> worldClockTimeZoneSet = data.getSavedTimeZones();
+		if(position == worldClockTimeZoneSet.size() - 1)
+			return;
+
+		for(WorldClockTimeZone w : worldClockTimeZoneSet) {
+			if(w.getPosition() == position + 1) {
+				w.setPosition(position);
+				break;
+			}
+		}
+
+		selectedTimeZone.setPosition(position + 1);
+	}
+
+	private void changePositionsAfterWorldClockTimeZoneRemoval(int deletedPosition) {
+		for(WorldClockTimeZone w : data.getSavedTimeZones()) {
+			int position = w.getPosition();
+			if(position > deletedPosition)
+				w.setPosition(position - 1);
+		}
+	}
+
+	private WorldClockTimeZone[] getSortedWorldClockTimeZoneArray(WorldClockTimeZone[] values) {
+		WorldClockTimeZone[] sorted = new WorldClockTimeZone[values.length];
+		HashSet<WorldClockTimeZone> unclear_id = new HashSet<>();
+
+		// get sorted array, if already sorted in O(n)
+		for(WorldClockTimeZone w : values) {
+			int position = w.getPosition();
+			if(position != -1 && position < values.length && sorted[position] == null) {
+					sorted[position] = w;
+					continue;
+				}
+			unclear_id.add(w);
+		}
+
+		// insert WCTZs without id
+		int i = -1;
+		for(WorldClockTimeZone w : unclear_id) {
+			while (i < values.length) {
+				i++;
+				if (sorted[i] == null) {
+					sorted[i] = w;
+					w.setPosition(i);
+					break;
+				}
+			}
+		}
+
+		return sorted;
+	}
+
 	/**
 	 * Refresh list of timezones
 	 * @return number of items in list after refresh
@@ -214,6 +298,8 @@ public class WorldClockActivity extends AppCompatActivity {
 	private int refreshListView() {
 		WorldClockTimeZone[] values = data.getSavedTimeZones().toArray(
 				new WorldClockTimeZone[] {});
+
+		values = getSortedWorldClockTimeZoneArray(values);
 
 		Log.d(TAG, "Loaded data size for refresh:" + values.length);
 

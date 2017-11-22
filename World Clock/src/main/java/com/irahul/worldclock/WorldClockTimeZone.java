@@ -30,6 +30,7 @@ public class WorldClockTimeZone {
 	private static final String OFFSET_FORMAT = "%s %02d:%02d";
 	private TimeZone timeZone;
 	private String displayName;
+	private int position;
 	
 	public WorldClockTimeZone(TimeZone timeZone) {
 		this(timeZone, timeZone.getDisplayName());
@@ -40,6 +41,11 @@ public class WorldClockTimeZone {
 		this.displayName = displayName;
 	}
 
+	public WorldClockTimeZone(TimeZone timeZone, String displayName, int position) {
+		this.timeZone = timeZone;
+		this.displayName = displayName;
+		this.position = position;
+	}
 
 	@Override
 	public String toString() {
@@ -57,10 +63,16 @@ public class WorldClockTimeZone {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-	
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
 	public TimeZone getTimeZone() {
 		return this.timeZone;
 	}
+
+	public int getPosition(){return this.position;}
 	
 	@Override
 	public boolean equals(Object o) {		
