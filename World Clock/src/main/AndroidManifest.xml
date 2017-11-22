@@ -18,8 +18,8 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.irahul.worldclock"
-    android:versionCode="3"
-    android:versionName="0.7" >
+    android:versionCode="4"
+    android:versionName="0.8" >
 
     <!-- Clock image from http://openclipart.org/detail/12597/analog-clock-by-anonymous-12597 -->
     <application
