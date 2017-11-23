@@ -30,7 +30,7 @@ public class WorldClockTimeZone {
 	private static final String OFFSET_FORMAT = "%s %02d:%02d";
 	private TimeZone timeZone;
 	private String displayName;
-	private int position;
+	private int position = -1;
 	
 	public WorldClockTimeZone(TimeZone timeZone) {
 		this(timeZone, timeZone.getDisplayName());
