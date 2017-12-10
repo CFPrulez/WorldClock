@@ -18,7 +18,7 @@ TODOs (some may be implemented in the future):
 - [x] ~~New SDK for new UI~~
 - [x] ~~Support for non-ASCII characters~~
 - [x] ~~12/24 hour format depending on system settings~~
-- [ ] Update About section
+- [x] ~~Update About section~~
 - [x] ~~Material design elements (FAB)~~
 - [x] ~~Custom sorting~~
 - [ ] More material design elements (ActionBar, Swipe)
