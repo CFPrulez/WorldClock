@@ -21,7 +21,7 @@ TODOs (some may be implemented in the future):
 - [ ] Update About section
 - [x] ~~Material design elements (FAB)~~
 - [x] ~~Custom sorting~~
-- [ ] More material design elements (ActionBar)
+- [ ] More material design elements (ActionBar, Swipe)
 - [ ] Provide apk/Merge into upstream
 
 ## Included projects
