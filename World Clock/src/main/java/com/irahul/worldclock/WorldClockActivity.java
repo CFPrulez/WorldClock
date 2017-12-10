@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -61,13 +62,18 @@ public class WorldClockActivity extends AppCompatActivity {
 		
 	private WorldClockData data;
 	private TimeZoneListAdapter adapter;
+	private Toolbar toolbar;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.worldclock_main);
-		
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar.setTitle(R.string.app_name);
+
+		setSupportActionBar(toolbar);
+
 		//init data
 		data = new WorldClockData(getApplicationContext());						
 		int listSize = refreshListView();

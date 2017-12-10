@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,11 +14,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.about_title);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Button author = (Button) findViewById(R.id.button_author);
         author.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +102,7 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home || item.getItemId() == R.id.menu_back) {
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }

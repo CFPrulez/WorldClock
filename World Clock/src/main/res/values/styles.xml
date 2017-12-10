@@ -1,5 +1,13 @@
 <resources>
-<style name="MyFloatingButton" parent="Theme.AppCompat.Light">
-    <item name="colorAccent">@android:color/background_dark</item>
-</style>
+    <style name="MyFloatingButton" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@android:color/background_dark</item>
+    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light"/>
+    <style name="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>
