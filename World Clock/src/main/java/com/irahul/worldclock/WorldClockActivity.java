@@ -193,8 +193,11 @@ public class WorldClockActivity extends AppCompatActivity {
 			invokeAddZoneActivity();
 			return true;
 		case R.id.menu_about:
+			Intent i = new Intent(WorldClockActivity.this, AboutActivity.class);
+			startActivity(i);
 			//about menu
-			showAboutDialog();						
+			//showAboutDialog();
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -213,7 +216,7 @@ public class WorldClockActivity extends AppCompatActivity {
 			.setCancelable(true)
 			.setView(v)
 			.create();
-		
+
 		dialog.show();
 	}
 
