@@ -138,6 +138,7 @@ public class WorldClockActivity extends AppCompatActivity {
 				data.deleteZone(selectedTimeZone);
 				changePositionsAfterWorldClockTimeZoneRemoval(position);
 				refreshListView();
+				data.updateFile();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -166,7 +167,8 @@ public class WorldClockActivity extends AppCompatActivity {
 		}
 		
 		//refresh data 
-		refreshListView();		
+		refreshListView();
+		data.updateFile();
 		super.onActivityResult(requestCode, resultCode, intentReceived);
 	}
 
