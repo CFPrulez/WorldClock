@@ -25,10 +25,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -46,17 +49,24 @@ import android.widget.Toast;
  * @author rahul
  * 
  */
-public class TimeZoneEdit extends Activity {
+public class TimeZoneEdit extends AppCompatActivity {
 	private static final String TAG = TimeZoneEdit.class.getName();
 	private static final int DIALOG_TIMEZONE_LIST = 0;
 	
-	private WorldClockTimeZone selectedTimeZone = null;	
+	private WorldClockTimeZone selectedTimeZone = null;
+	private Toolbar toolbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.timezone_edit);
-		
+
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar.setTitle(R.string.title_timezone_add);
+
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		//button that brings up dialog with timezone list
 		Button buttonTimeZoneList = (Button)findViewById(R.id.button_timezone_edit_list);
 		buttonTimeZoneList.setOnClickListener(new OnClickListener() {
@@ -72,8 +82,7 @@ public class TimeZoneEdit extends Activity {
 
 		final String action = intent.getAction();
 		if (Intent.ACTION_EDIT.equals(action)) {
-			TextView title = (TextView) findViewById(R.id.timezone_edit_title);
-			title.setText(getString(R.string.title_timezone_edit));
+			toolbar.setTitle(R.string.title_timezone_edit);
 
 			// editing zone info
 			Log.d(TAG, "EDIT tz="+ intent.getStringExtra(WorldClockActivity.INTENT_TZ_ID_IN));
@@ -88,8 +97,6 @@ public class TimeZoneEdit extends Activity {
 			displayName.setText(intent.getStringExtra(WorldClockActivity.INTENT_TZ_DISPLAYNAME_IN));
 
 		} else if (Intent.ACTION_INSERT.equals(action)) {
-			TextView title = (TextView) findViewById(R.id.timezone_edit_title);
-			title.setText(getString(R.string.title_timezone_add));
 			//bring up timezone select dialog on start
 			showDialog(DIALOG_TIMEZONE_LIST);
 		} else {
@@ -194,4 +201,16 @@ public class TimeZoneEdit extends Activity {
 	    }
 	    return dialog;
 	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == android.R.id.home) {
+			setResult(RESULT_CANCELED);
+			finish();
+			return true;
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
+
 }
