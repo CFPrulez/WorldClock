@@ -21,17 +21,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
 
-import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,7 +36,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 /**
  * Main world clock activity
@@ -195,29 +191,9 @@ public class WorldClockActivity extends AppCompatActivity {
 		case R.id.menu_about:
 			Intent i = new Intent(WorldClockActivity.this, AboutActivity.class);
 			startActivity(i);
-			//about menu
-			//showAboutDialog();
-
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-	
-	private void showAboutDialog() {
-		LayoutInflater inflater = LayoutInflater.from(WorldClockActivity.this);
-		View v = inflater.inflate(R.layout.scrollable_textview, null);
-		TextView aboutText = v.findViewById(R.id.textview_scrollable);
-		aboutText.setText(R.string.about_message);
-		aboutText.setMovementMethod(LinkMovementMethod.getInstance());
-
-	    AlertDialog dialog = new AlertDialog.Builder(this)
-			.setPositiveButton(android.R.string.ok, null)
-			.setTitle(R.string.about_title)
-			.setCancelable(true)
-			.setView(v)
-			.create();
-
-		dialog.show();
 	}
 
 	private void invokeAddZoneActivity() {
